@@ -43,6 +43,14 @@ const PRIVATE_CONTRIBUTIONS_BY_DATE: Record<string, number> = {
   "2026-10-13": 1,
 };
 
+// Baseline map to prevent 3rd-party API cache lag from downgrading today's commits
+const BASELINE_CONTRIBUTIONS_MAP: Record<string, number> = {};
+(realContributions as ContributionDay[]).forEach((item) => {
+  if (item.count > 0) {
+    BASELINE_CONTRIBUTIONS_MAP[item.date] = item.count;
+  }
+});
+
 export const ContributionSkyline: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
@@ -84,9 +92,11 @@ export const ContributionSkyline: React.FC = () => {
         if (data && Array.isArray(data.contributions) && data.contributions.length > 0) {
           const formatted: ContributionDay[] = data.contributions.map((c: any) => {
             const privateCnt = PRIVATE_CONTRIBUTIONS_BY_DATE[c.date] || 0;
+            const fetchedCount = (Number(c.count) || 0) + privateCnt;
+            const baselineCount = BASELINE_CONTRIBUTIONS_MAP[c.date] || 0;
             return {
               date: c.date,
-              count: (Number(c.count) || 0) + privateCnt,
+              count: Math.max(fetchedCount, baselineCount),
             };
           });
           setContributionsData(formatted);
