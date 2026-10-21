@@ -1004,11 +1004,36 @@ export const ContributionSkyline: React.FC = () => {
           }
         }
 
-        /* Tooltip */
+        /* Tooltip — Premium GitHub Dark Style */
         .gh-skyline-skin [role="tooltip"] {
-          font-family: var(--font-body) !important;
-          border-radius: 10px !important;
-          box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6) !important;
+          font-family: var(--font-mono), var(--font-body), sans-serif !important;
+          background: #090D16 !important;
+          color: #F8FAFC !important;
+          border: 1px solid rgba(255, 255, 255, 0.16) !important;
+          border-radius: 8px !important;
+          padding: 7px 12px !important;
+          font-size: 0.78rem !important;
+          box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 12px rgba(57, 211, 83, 0.15) !important;
+          backdrop-filter: blur(10px) !important;
+          z-index: 50 !important;
+          pointer-events: none !important;
+        }
+
+        .gh-skyline-skin [role="tooltip"] strong {
+          color: #38BDF8 !important;
+          font-weight: 700 !important;
+          margin-right: 4px !important;
+        }
+
+        .gh-skyline-skin [role="tooltip"] span:not([aria-hidden="true"]) {
+          color: #CBD5E1 !important;
+          opacity: 1 !important;
+        }
+
+        .gh-skyline-skin [role="tooltip"] span[aria-hidden="true"] {
+          border-top: 5px solid #090D16 !important;
+          border-left: 5px solid transparent !important;
+          border-right: 5px solid transparent !important;
         }
 
         /* Legend swatches */

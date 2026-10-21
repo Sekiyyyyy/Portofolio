@@ -1297,19 +1297,21 @@ export default function ContributionSkyline({
             ref={tipRef}
             role="tooltip"
             aria-hidden={active < 0}
-            className="pointer-events-none absolute top-3 left-3 z-20 whitespace-nowrap rounded-md px-2.5 py-1.5 text-[12px] leading-none shadow-lg transition-opacity duration-150 sm:top-4 sm:left-4 motion-reduce:transition-none"
+            className="pointer-events-none absolute top-3 left-3 z-30 whitespace-nowrap rounded-lg px-3 py-1.5 text-[12px] leading-tight shadow-2xl transition-opacity duration-150 sm:top-4 sm:left-4 motion-reduce:transition-none"
             style={{
               opacity: active >= 0 ? 1 : 0,
-              background: "var(--color-foreground, #171717)",
-              color: "var(--color-background, #ffffff)",
+              background: "#090D16",
+              color: "#F8FAFC",
+              border: "1px solid rgba(255, 255, 255, 0.16)",
+              boxShadow: "0 10px 25px -3px rgba(0, 0, 0, 0.7), 0 0 12px rgba(57, 211, 83, 0.15)",
             }}
           >
             {active >= 0 && model.cells[active] ? (
               <>
-                <strong className="font-semibold">
+                <strong className="font-semibold text-emerald-400">
                   {model.cells[active].count ? nf.format(model.cells[active].count) + " " + noun(model.cells[active].count) : "No " + plural}
                 </strong>
-                <span className="opacity-75"> on {dfy.format(dayMs(model.cells[active].date))}</span>
+                <span className="text-slate-300 ml-1.5 opacity-90">on {dfy.format(dayMs(model.cells[active].date))}</span>
               </>
             ) : (
               " "
@@ -1322,7 +1324,7 @@ export default function ContributionSkyline({
                 marginLeft: -5,
                 borderLeft: "5px solid transparent",
                 borderRight: "5px solid transparent",
-                borderTop: "5px solid var(--color-foreground, #171717)",
+                borderTop: "5px solid #090D16",
               }}
             />
           </div>
