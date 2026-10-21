@@ -190,39 +190,59 @@ export const MusicSection: React.FC = () => {
               <span className="player-album-badge">{activeSong.album || 'ALBUM'}</span>
             </div>
 
-            {/* Vinyl Record & Sleeve Assembly (Balanced & Proportional) */}
-            <div className="vinyl-assembly-area">
-              {/* Spinning Vinyl Record (Slides slightly out when active, never overflowing) */}
-              <div className={`vinyl-lp-disc ${isPlaying ? 'lp-spinning' : ''}`}>
-                <div className="lp-grooves">
-                  <div className="lp-center-badge">
-                    <img src={activeSong.cover} alt="label" className="lp-label-thumb" />
-                    <div className="lp-spindle-hole" />
+            {/* Hi-Fi Turntable Deck Console */}
+            <div className="turntable-deck">
+              {/* Turntable Platter & Vinyl Record */}
+              <div className="turntable-platter-well">
+                <div className={`turntable-vinyl ${isPlaying ? 'vinyl-spinning' : 'vinyl-paused'}`}>
+                  {/* Concentric Vinyl Grooves */}
+                  <div className="vinyl-groove-rings" />
+                  {/* Specular Vinyl Light Reflection */}
+                  <div className="vinyl-specular-sheen" />
+                  {/* Center Album Artwork Label */}
+                  <div className="vinyl-center-art">
+                    <img src={activeSong.cover} alt={activeSong.title} className="vinyl-art-img" />
+                    <div className="vinyl-spindle-core" />
                   </div>
                 </div>
               </div>
 
-              {/* Vinyl Sleeve with Cover Artwork */}
-              <div className={`vinyl-sleeve-front ${isPlaying ? 'sleeve-active' : ''}`}>
-                <img src={activeSong.cover} alt={activeSong.title} className="vinyl-cover-img" />
-                <div className="sleeve-gloss" />
-
-                {/* Floating Equalizer Wave */}
-                {isPlaying && (
-                  <div className="vinyl-live-equalizer">
-                    <span className="bar bar-1" />
-                    <span className="bar bar-2" />
-                    <span className="bar bar-3" />
-                    <span className="bar bar-4" />
+              {/* Audiophile Mechanical Tonearm with Stylus */}
+              <div className={`turntable-tonearm ${isPlaying ? 'tonearm-playing' : ''}`}>
+                <div className="tonearm-pivot-base">
+                  <div className="pivot-ring" />
+                </div>
+                <div className="tonearm-metal-rod">
+                  <div className="tonearm-headshell">
+                    <div className="tonearm-cartridge-tip" />
                   </div>
-                )}
+                </div>
+              </div>
+
+              {/* Deck Footer: Strobe Speed LED & Audio Specs */}
+              <div className="turntable-deck-footer">
+                <div className="turntable-speed-badge">
+                  <span className={`speed-led ${isPlaying ? 'led-active' : ''}`} />
+                  <span>33 ⅓ RPM</span>
+                </div>
+                <span className="turntable-brand">HI-FI DIRECT DRIVE</span>
               </div>
             </div>
 
             {/* Currently Playing Metadata */}
             <div className="player-meta-block">
               <div className="player-track-info">
-                <h3 className="player-song-title" title={activeSong.title}>{activeSong.title}</h3>
+                <div className="player-title-row">
+                  <h3 className="player-song-title" title={activeSong.title}>{activeSong.title}</h3>
+                  {isPlaying && (
+                    <div className="player-inline-eq" title="Audio Active">
+                      <span className="eq-bar bar-1" />
+                      <span className="eq-bar bar-2" />
+                      <span className="eq-bar bar-3" />
+                      <span className="eq-bar bar-4" />
+                    </div>
+                  )}
+                </div>
                 <p className="player-song-artist">{activeSong.artist}</p>
               </div>
 
@@ -469,141 +489,263 @@ export const MusicSection: React.FC = () => {
           50% { transform: scale(1.3); opacity: 0.6; }
         }
 
-        .vinyl-assembly-area {
+        /* ==========================================================================
+           HI-FI TURNTABLE DECK CONSOLE
+           ========================================================================== */
+        .turntable-deck {
           position: relative;
-          width: 170px;
-          height: 170px;
-          margin: 0 auto 18px auto;
+          background: #0E121B;
+          border-radius: 14px;
+          padding: 14px 12px 10px 12px;
+          border: 1px solid rgba(255, 255, 255, 0.08);
+          box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.5), 0 8px 24px rgba(0, 0, 0, 0.08);
+          margin-bottom: 18px;
+          overflow: hidden;
         }
 
-        /* Vinyl LP Disc */
-        .vinyl-lp-disc {
+        .turntable-platter-well {
+          position: relative;
+          width: 176px;
+          height: 176px;
+          margin: 0 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        /* 360° Smooth Fluid Spinning Vinyl Record */
+        .turntable-vinyl {
+          position: relative;
+          width: 172px;
+          height: 172px;
+          border-radius: 50%;
+          background: radial-gradient(circle at 50% 50%, #262B38 0%, #0B0E14 75%);
+          box-shadow: 
+            0 10px 24px rgba(0, 0, 0, 0.6),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          animation: turntable-spin 3.4s linear infinite;
+          animation-play-state: paused;
+          will-change: transform;
+        }
+
+        .turntable-vinyl.vinyl-spinning {
+          animation-play-state: running;
+        }
+
+        @keyframes turntable-spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+
+        /* Concentric Micro-grooves of the record */
+        .vinyl-groove-rings {
           position: absolute;
-          top: 5px;
-          left: 5px;
-          width: 160px;
-          height: 160px;
+          inset: 6px;
           border-radius: 50%;
-          background: #111111;
-          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-          transform: translateX(0);
-          z-index: 1;
-        }
-
-        .vinyl-lp-disc.lp-spinning {
-          transform: translateX(24%);
-          animation: lp-rotate 4s linear infinite;
-        }
-
-        @keyframes lp-rotate {
-          from { transform: translateX(24%) rotate(0deg); }
-          to { transform: translateX(24%) rotate(360deg); }
-        }
-
-        .lp-grooves {
-          width: 100%;
-          height: 100%;
-          border-radius: 50%;
-          border: 3px solid #1a1a1a;
           background: repeating-radial-gradient(
-            circle,
-            #111111 0px,
-            #111111 2px,
-            #1e1e1e 3px,
-            #111111 4px
+            circle at center,
+            rgba(255, 255, 255, 0.035) 0px,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px,
+            transparent 3px
           );
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .lp-center-badge {
-          width: 76px;
-          height: 76px;
-          border-radius: 50%;
-          position: relative;
-          overflow: hidden;
-          border: 3px solid #D96B27;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .lp-label-thumb {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .lp-spindle-hole {
-          position: absolute;
-          width: 16px;
-          height: 16px;
-          border-radius: 50%;
-          background: #000000;
-          border: 2px solid rgba(255, 255, 255, 0.4);
-        }
-
-        /* Vinyl Sleeve */
-        .vinyl-sleeve-front {
-          position: relative;
-          width: 160px;
-          height: 160px;
-          border-radius: 12px;
-          overflow: hidden;
-          box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
-          z-index: 2;
-          background: #1E293B;
-          transition: transform 0.4s ease;
-        }
-
-        .vinyl-sleeve-front.sleeve-active {
-          transform: perspective(700px) rotateY(-5deg);
-        }
-
-        .vinyl-cover-img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
-        .sleeve-gloss {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(255, 255, 255, 0.18) 0%, transparent 60%);
           pointer-events: none;
         }
 
-        .vinyl-live-equalizer {
+        /* Dual Specular Sheen (Real vinyl luster reflection) */
+        .vinyl-specular-sheen {
           position: absolute;
-          bottom: 10px;
-          right: 10px;
-          background: rgba(0, 0, 0, 0.75);
-          backdrop-filter: blur(8px);
-          padding: 5px 7px;
-          border-radius: 6px;
+          inset: 0;
+          border-radius: 50%;
+          background: conic-gradient(
+            from 40deg at 50% 50%,
+            rgba(255, 255, 255, 0.14) 0deg,
+            transparent 50deg,
+            rgba(255, 255, 255, 0.14) 180deg,
+            transparent 230deg,
+            rgba(255, 255, 255, 0.14) 360deg
+          );
+          pointer-events: none;
+        }
+
+        /* Center Album Art Label */
+        .vinyl-center-art {
+          position: relative;
+          width: 66px;
+          height: 66px;
+          border-radius: 50%;
+          overflow: hidden;
+          border: 2px solid #D96B27;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+          z-index: 2;
+        }
+
+        .vinyl-art-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+
+        .vinyl-spindle-core {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 13px;
+          height: 13px;
+          border-radius: 50%;
+          background: #090B10;
+          border: 2px solid #E2E8F0;
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Tonearm Assembly */
+        .turntable-tonearm {
+          position: absolute;
+          top: 10px;
+          right: 18px;
+          width: 32px;
+          height: 125px;
+          transform-origin: 16px 12px;
+          transform: rotate(0deg);
+          transition: transform 0.65s cubic-bezier(0.2, 0.9, 0.3, 1);
+          pointer-events: none;
+          z-index: 10;
+        }
+
+        .turntable-tonearm.tonearm-playing {
+          transform: rotate(25deg);
+        }
+
+        .tonearm-pivot-base {
+          position: absolute;
+          top: 0;
+          left: 2px;
+          width: 26px;
+          height: 26px;
+          border-radius: 50%;
+          background: radial-gradient(circle, #F1F5F9 0%, #64748B 100%);
+          border: 1px solid #475569;
+          box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .tonearm-pivot-base .pivot-ring {
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background: #0F172A;
+          border: 1px solid #CBD5E1;
+        }
+
+        .tonearm-metal-rod {
+          position: absolute;
+          top: 13px;
+          left: 13px;
+          width: 3.5px;
+          height: 86px;
+          background: linear-gradient(90deg, #FFFFFF, #94A3B8, #475569);
+          border-radius: 2px;
+          box-shadow: 2px 3px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .tonearm-headshell {
+          position: absolute;
+          bottom: -15px;
+          left: -4px;
+          width: 11px;
+          height: 18px;
+          background: #1E293B;
+          border: 1px solid #475569;
+          border-radius: 2px 2px 4px 4px;
+          transform: rotate(-10deg);
+        }
+
+        .tonearm-cartridge-tip {
+          position: absolute;
+          bottom: 2px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 3px;
+          height: 5px;
+          background: #D96B27;
+          border-radius: 1px;
+        }
+
+        /* Turntable Footer */
+        .turntable-deck-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 10px;
+          padding: 0 4px;
+        }
+
+        .turntable-speed-badge {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          font-family: var(--font-mono);
+          font-size: 0.62rem;
+          color: #94A3B8;
+          font-weight: 600;
+        }
+
+        .speed-led {
+          width: 5px;
+          height: 5px;
+          border-radius: 50%;
+          background: #64748B;
+        }
+
+        .speed-led.led-active {
+          background: #22C55E;
+          box-shadow: 0 0 6px #22C55E;
+        }
+
+        .turntable-brand {
+          font-family: var(--font-mono);
+          font-size: 0.58rem;
+          color: #64748B;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
+        }
+
+        /* Metadata & Title Row */
+        .player-title-row {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+
+        .player-inline-eq {
           display: flex;
           align-items: flex-end;
-          gap: 2.5px;
-          height: 18px;
+          gap: 2px;
+          height: 14px;
         }
 
-        .vinyl-live-equalizer .bar {
+        .player-inline-eq .eq-bar {
           width: 2.5px;
           background: #D96B27;
-          border-radius: 2px;
-          animation: eq-bounce 1s ease-in-out infinite alternate;
+          border-radius: 1px;
+          animation: eq-inline-bounce 0.8s ease-in-out infinite alternate;
         }
 
-        .vinyl-live-equalizer .bar-1 { height: 14px; animation-delay: 0.1s; }
-        .vinyl-live-equalizer .bar-2 { height: 7px; animation-delay: 0.3s; }
-        .vinyl-live-equalizer .bar-3 { height: 16px; animation-delay: 0.2s; }
-        .vinyl-live-equalizer .bar-4 { height: 9px; animation-delay: 0.4s; }
+        .player-inline-eq .bar-1 { height: 12px; animation-delay: 0.1s; }
+        .player-inline-eq .bar-2 { height: 6px; animation-delay: 0.3s; }
+        .player-inline-eq .bar-3 { height: 14px; animation-delay: 0.15s; }
+        .player-inline-eq .bar-4 { height: 8px; animation-delay: 0.4s; }
 
-        @keyframes eq-bounce {
+        @keyframes eq-inline-bounce {
           0% { height: 3px; }
-          100% { height: 16px; }
+          100% { height: 14px; }
         }
 
         /* Player Metadata */
