@@ -31,26 +31,29 @@ export const portfolioData = {
     {
       number: "01",
       title: "App Ujian CBT",
-      subtitle: "Computer-based test & examination portal with automated scoring, session scheduling, and student monitoring.",
-      tech: ["LARAVEL", "REACT", "TAILWIND", "MYSQL"],
+      subtitle: "Aplikasi ujian online berbasis komputer (CBT) untuk pelaksanaan ujian sekolah secara terstruktur dengan manajemen bank soal, timer ujian, dan kalkulasi nilai otomatis.",
+      domain: "ujian.tiksmkn1beringin.my.id",
+      tech: ["Laravel", "React", "Tailwind CSS", "MySQL"],
       image: "/projects/app-ujian.png",
-      link: "#"
+      link: "https://ujian.tiksmkn1beringin.my.id"
     },
     {
       number: "02",
       title: "SIDATA Siswa",
-      subtitle: "Centralized student information system, academic data dashboard, and class management platform.",
-      tech: ["LARAVEL", "BOOTSTRAP", "MYSQL", "JS"],
+      subtitle: "Sistem informasi pendataan dan rekapitulasi akademik siswa terpusat untuk mempermudah pengelolaan data kelas, profil peserta didik, dan administrasi sekolah.",
+      domain: "sidata.tiksmkn1beringin.my.id",
+      tech: ["Laravel", "Bootstrap", "MySQL", "JavaScript"],
       image: "/projects/sidata-siswa.png",
-      link: "#"
+      link: "https://sidata.tiksmkn1beringin.my.id"
     },
     {
       number: "03",
       title: "E-Jurnal",
-      subtitle: "Digital vocational classroom activity journal, activity proof validation, and assessment tracking.",
-      tech: ["REACT", "LARAVEL", "TAILWIND", "MYSQL"],
+      subtitle: "Platform jurnal digital untuk pencatatan dan monitoring aktivitas harian siswa vokasi (PKL) yang dilengkapi bukti kehadiran dan validasi penilaian pembimbing.",
+      domain: "jurnal.tiksmkn1beringin.my.id",
+      tech: ["React", "Laravel", "Tailwind CSS", "MySQL"],
       image: "/projects/e-jurnal.png",
-      link: "#"
+      link: "https://jurnal.tiksmkn1beringin.my.id"
     }
   ],
   techStack: [

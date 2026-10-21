@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData } from '../data/portfolioData';
-import { ArrowUpRight } from 'lucide-react';
+import { Lock, ExternalLink, Globe } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,38 +12,7 @@ interface ProjectCardProps {
   total: number;
 }
 
-const PROJECT_SPECS: Record<
-  string,
-  { domain: string; arch: string; metric: string; role: string }
-> = {
-  '01': {
-    domain: 'cbt.smkn1beringin.sch.id',
-    arch: 'High-Concurrency Engine',
-    metric: '1,400+ Active Students',
-    role: 'School Digitalization',
-  },
-  '02': {
-    domain: 'sidata.smkn1beringin.sch.id',
-    arch: 'Academic Data Architecture',
-    metric: 'Multi-Role RBAC & Audit',
-    role: 'Centralized Portal',
-  },
-  '03': {
-    domain: 'ejurnal.smkn1beringin.sch.id',
-    arch: 'Vocational Activity Ledger',
-    metric: 'Digital Proof Verification',
-    role: 'Classroom Workflow',
-  },
-};
-
 const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
-  const spec = PROJECT_SPECS[project.number] || {
-    domain: 'system.smkn1beringin.sch.id',
-    arch: 'Full Stack Architecture',
-    metric: 'Production System',
-    role: 'Web Application',
-  };
-
   return (
     <div
       style={{
@@ -56,28 +25,19 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
     >
       <div className="project-card w-full">
         <div className="project-grid">
-          {/* Left Column: Project Architectural Info */}
+          {/* Left Column: Project Info */}
           <div className="project-info-holder">
             <div>
               <div className="project-meta-row">
-                <span className="project-num">SYS // {project.number}</span>
-                <span className="project-role-badge">{spec.role}</span>
+                <span className="project-num">PROJECT // 0{index + 1}</span>
+                <span className="project-domain-tag">
+                  <Globe size={11} className="inline mr-1 text-[#D96B27]" />
+                  {project.domain}
+                </span>
               </div>
 
               <h3 className="project-title">{project.title}</h3>
               <p className="project-subtitle">{project.subtitle}</p>
-
-              {/* Architectural Technical Specs */}
-              <div className="arch-specs-grid">
-                <div className="arch-spec-item">
-                  <span className="spec-label">ARCHITECTURE</span>
-                  <span className="spec-value">{spec.arch}</span>
-                </div>
-                <div className="arch-spec-item">
-                  <span className="spec-label">CAPACITY & SCOPE</span>
-                  <span className="spec-value">{spec.metric}</span>
-                </div>
-              </div>
 
               {/* Tech Stack Pills */}
               <div className="tech-pills">
@@ -92,17 +52,17 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
             <div className="project-action-row">
               <a
                 href={project.link}
-                className="workstation-action-btn"
+                className="project-action-btn"
                 target="_blank"
-                rel="noreferrer"
+                rel="noopener noreferrer"
               >
-                <span>VIEW ARCHITECTURE</span>
-                <ArrowUpRight size={15} />
+                <span>Buka Aplikasi</span>
+                <ExternalLink size={14} />
               </a>
             </div>
           </div>
 
-          {/* Right Column: Workstation Browser Mockup Frame (Frames the bright photo) */}
+          {/* Right Column: Clean Browser Mockup Frame */}
           <div className="workstation-wrapper">
             <div className="workstation-window">
               {/* Window Header */}
@@ -112,17 +72,28 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
                   <span className="dot dot-yellow" />
                   <span className="dot dot-green" />
                 </div>
+
                 <div className="workstation-address-bar">
-                  <span className="lock-icon">🔒</span>
-                  <span className="address-text">{spec.domain}</span>
+                  <Lock size={11} className="text-emerald-400 shrink-0" />
+                  <span className="address-text">{project.domain}</span>
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="address-link-icon"
+                    title={`Kunjungi ${project.domain}`}
+                  >
+                    <ExternalLink size={11} />
+                  </a>
                 </div>
-                <div className="workstation-status">
-                  <span className="live-dot" />
-                  <span className="status-text">ONLINE</span>
+
+                <div className="domain-status-badge">
+                  <span className="status-dot" />
+                  <span>Live</span>
                 </div>
               </div>
 
-              {/* Image Preview with calibrated brightness */}
+              {/* Image Preview with clean framing */}
               <div className="workstation-screen">
                 <img
                   src={project.image}
@@ -198,7 +169,7 @@ export const ProjectsSection: React.FC = () => {
           <div>
             <div className="overflow-hidden">
               <span className="section-tag dark projects-reveal-tag inline-block">
-                02 // SELECTED WORK
+                02 // PORTFOLIO
               </span>
             </div>
             <h2 className="section-title overflow-hidden mt-2">
@@ -207,7 +178,7 @@ export const ProjectsSection: React.FC = () => {
                 className="inline-block projects-title-word"
                 style={{ color: '#D96B27' }}
               >
-                ARCHITECTURE
+                PROJECTS
               </span>
             </h2>
           </div>
@@ -220,7 +191,7 @@ export const ProjectsSection: React.FC = () => {
                 color: '#71717A',
               }}
             >
-              03 ARCHITECTURAL SYSTEMS
+              03 WEB APPLICATIONS
             </div>
           </div>
         </div>

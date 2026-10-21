@@ -562,62 +562,32 @@ body {
   line-height: 1.6;
 }
 
-/* Architecture Specs Grid */
-.arch-specs-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  margin-bottom: 18px;
-  padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 10px;
-}
-
-@media (min-width: 640px) {
-  .arch-specs-grid {
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-.arch-spec-item {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.spec-label {
+.project-domain-tag {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: #D96B27;
-  letter-spacing: 0.08em;
-  font-weight: 700;
-}
-
-.spec-value {
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  color: #E2E8F0;
-  font-weight: 500;
+  font-size: 0.72rem;
+  color: #94A3B8;
+  display: inline-flex;
+  align-items: center;
 }
 
 .tech-pills {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  margin-top: 14px;
   margin-bottom: 24px;
 }
 
 .tech-pill {
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.05em;
   padding: 5px 12px;
-  border-radius: 9999px;
-  background: #141824;
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  background: #141926;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   color: #CBD5E1;
-  font-weight: 600;
+  font-weight: 500;
   transition: all 0.2s ease;
 }
 
@@ -627,63 +597,61 @@ body {
   color: #FFFFFF;
 }
 
-.workstation-action-btn {
+.project-action-btn {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  padding: 10px 22px;
-  border-radius: 10px;
-  background: rgba(217, 107, 39, 0.15);
-  border: 1.5px solid rgba(217, 107, 39, 0.8);
+  padding: 10px 20px;
+  border-radius: 8px;
+  background: #D96B27;
   color: #FFFFFF;
   font-family: var(--font-mono);
   font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
   text-decoration: none;
-  box-shadow: 0 4px 16px rgba(217, 107, 39, 0.25);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 14px rgba(217, 107, 39, 0.3);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.workstation-action-btn:hover {
-  background: #D96B27;
-  border-color: #D96B27;
-  color: #FFFFFF;
+.project-action-btn:hover {
+  background: #EA580C;
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(217, 107, 39, 0.45);
+  box-shadow: 0 6px 20px rgba(217, 107, 39, 0.45);
+  color: #FFFFFF;
 }
 
 /* ==========================================================================
    WORKSTATION BROWSER MOCKUP FRAME (Dark Bezel for Light UI Images)
    ========================================================================== */
 .workstation-wrapper {
-  padding: 8px;
+  padding: 6px;
   width: 100%;
 }
 
 .workstation-window {
   width: 100%;
   background: #0B0E17;
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   box-shadow: 
     0 16px 40px -10px rgba(0, 0, 0, 0.8),
-    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .project-card:hover .workstation-window {
   border-color: rgba(217, 107, 39, 0.35);
   box-shadow: 
-    0 24px 50px -10px rgba(0, 0, 0, 0.9),
-    0 0 25px rgba(217, 107, 39, 0.12);
+    0 20px 48px -10px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(217, 107, 39, 0.12);
 }
 
 .workstation-header {
   height: 38px;
-  background: #131724;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #121622;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.07);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -697,48 +665,59 @@ body {
 }
 
 .traffic-lights .dot {
-  width: 9px;
-  height: 9px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   display: inline-block;
 }
 
 .traffic-lights .dot-red {
-  background: #FF5F56;
+  background: #EF4444;
 }
 
 .traffic-lights .dot-yellow {
-  background: #FFBD2E;
+  background: #F59E0B;
 }
 
 .traffic-lights .dot-green {
-  background: #27C93F;
+  background: #10B981;
 }
 
 .workstation-address-bar {
   display: flex;
   align-items: center;
-  gap: 6px;
-  background: rgba(8, 10, 16, 0.7);
+  gap: 8px;
+  background: #090C14;
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 3px 12px;
   border-radius: 6px;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   color: #94A3B8;
-  letter-spacing: 0.02em;
-  max-width: 260px;
+  max-width: 280px;
+}
+
+.workstation-address-bar .address-text {
+  color: #E2E8F0;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.workstation-address-bar .lock-icon {
-  font-size: 0.65rem;
-  opacity: 0.7;
+.address-link-icon {
+  display: inline-flex;
+  align-items: center;
+  color: #64748B;
+  transition: color 0.15s ease;
 }
 
-.workstation-status {
+.address-link-icon:hover {
+  color: #FFFFFF;
+}
+
+.domain-status-badge {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -748,7 +727,7 @@ body {
   font-weight: 600;
 }
 
-.workstation-status .live-dot {
+.domain-status-badge .status-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -782,7 +761,7 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.05);
 }
 
 /* ==========================================================================
