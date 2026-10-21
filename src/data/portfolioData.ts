@@ -105,11 +105,11 @@ export const portfolioData = {
     handle: "a.k.a Rizky",
     username: "Sekiyyyyy",
     role: "Software Engineering Student",
-    repos: "9 REPOS",
+    repos: "10 REPOS",
     privateRepos: 2,
     followers: "8 FOLLOWERS",
     following: "9 FOLLOWING",
-    contributions: "111 commits in the last year",
+    contributions: "207 contributions in the last year",
     url: "https://github.com/Sekiyyyyy"
   },
   songs: [

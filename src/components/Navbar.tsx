@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { portfolioData } from '../data/portfolioData';
 
 interface NavbarProps {
   onNavigate: (targetId: string) => void;

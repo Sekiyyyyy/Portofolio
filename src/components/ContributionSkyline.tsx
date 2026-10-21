@@ -19,6 +19,30 @@ const OctocatIcon: React.FC<{ size?: number; className?: string }> = ({ size = 5
   </svg>
 );
 
+// Private repository contributions map (AppUjian, etc.) to match real profile total (207 contributions)
+const PRIVATE_CONTRIBUTIONS_BY_DATE: Record<string, number> = {
+  "2026-09-15": 1,
+  "2026-09-16": 2,
+  "2026-09-17": 3,
+  "2026-09-18": 1,
+  "2026-09-19": 2,
+  "2026-09-22": 4,
+  "2026-09-23": 1,
+  "2026-09-24": 8,
+  "2026-09-26": 5,
+  "2026-09-27": 10,
+  "2026-09-28": 6,
+  "2026-09-29": 5,
+  "2026-09-30": 9,
+  "2026-10-01": 6,
+  "2026-10-02": 4,
+  "2026-10-09": 2,
+  "2026-10-10": 9,
+  "2026-10-11": 2,
+  "2026-10-12": 8,
+  "2026-10-13": 1,
+};
+
 export const ContributionSkyline: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const headingRef = useRef<HTMLDivElement>(null);
@@ -26,7 +50,7 @@ export const ContributionSkyline: React.FC = () => {
 
   const [contributionsData, setContributionsData] = useState<ContributionDay[]>(realContributions as ContributionDay[]);
   const [stats, setStats] = useState({
-    repos: portfolioData.github.repos.replace(/\D/g, '') || '9',
+    repos: portfolioData.github.repos.replace(/\D/g, '') || '10',
     followers: portfolioData.github.followers.replace(/\D/g, '') || '8',
     following: portfolioData.github.following.replace(/\D/g, '') || '9',
     commitsText: portfolioData.github.contributions,
@@ -58,17 +82,18 @@ export const ContributionSkyline: React.FC = () => {
       .then((res) => (res.ok ? res.json() : null))
       .then((data) => {
         if (data && Array.isArray(data.contributions) && data.contributions.length > 0) {
-          const formatted: ContributionDay[] = data.contributions.map((c: any) => ({
-            date: c.date,
-            count: Number(c.count) || 0,
-          }));
+          const formatted: ContributionDay[] = data.contributions.map((c: any) => {
+            const privateCnt = PRIVATE_CONTRIBUTIONS_BY_DATE[c.date] || 0;
+            return {
+              date: c.date,
+              count: (Number(c.count) || 0) + privateCnt,
+            };
+          });
           setContributionsData(formatted);
-          const totalCommits =
-            data.total?.lastYear ??
-            data.contributions.reduce((acc: number, cur: any) => acc + (cur.count || 0), 0);
+          const totalContributions = formatted.reduce((acc: number, cur: ContributionDay) => acc + (cur.count || 0), 0);
           setStats((prev) => ({
             ...prev,
-            commitsText: `${totalCommits} commits in the last year`,
+            commitsText: `${totalContributions} contributions in the last year`,
           }));
         }
       })

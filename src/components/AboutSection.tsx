@@ -110,9 +110,6 @@ export const AboutSection: React.FC = () => {
     return () => ctx.revert();
   }, []);
 
-  const bioPart1 = `Hello, I am ${portfolioData.about.nameHighlight} (a.k.a ${portfolioData.about.aliasHighlight}). ${portfolioData.about.bioPart1}`;
-  const bioPart2 = portfolioData.about.bioPart2;
-
   return (
     <section ref={sectionRef} className="about-section" id="about">
       {/* Giant Faint Watermark Text */}
