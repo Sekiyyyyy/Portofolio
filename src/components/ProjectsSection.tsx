@@ -2,7 +2,7 @@ import React, { useRef, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { portfolioData } from '../data/portfolioData';
-import { Lock, ExternalLink, Globe } from 'lucide-react';
+import { Lock, ExternalLink } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -30,10 +30,6 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
             <div>
               <div className="project-meta-row">
                 <span className="project-num">PROJECT // 0{index + 1}</span>
-                <span className="project-domain-tag">
-                  <Globe size={11} className="inline mr-1 text-[#D96B27]" />
-                  {project.domain}
-                </span>
               </div>
 
               <h3 className="project-title">{project.title}</h3>
@@ -87,10 +83,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, index, total }) => {
                   </a>
                 </div>
 
-                <div className="domain-status-badge">
-                  <span className="status-dot" />
-                  <span>Live</span>
-                </div>
+                <div className="workstation-header-spacer" />
               </div>
 
               {/* Image Preview with clean framing */}

@@ -562,14 +562,6 @@ body {
   line-height: 1.6;
 }
 
-.project-domain-tag {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  color: #94A3B8;
-  display: inline-flex;
-  align-items: center;
-}
-
 .tech-pills {
   display: flex;
   flex-wrap: wrap;
@@ -717,22 +709,9 @@ body {
   color: #FFFFFF;
 }
 
-.domain-status-badge {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: #4ADE80;
-  font-weight: 600;
-}
-
-.domain-status-badge .status-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #22C55E;
-  box-shadow: 0 0 6px #22C55E;
+.workstation-header-spacer {
+  width: 36px;
+  height: 1px;
 }
 
 .workstation-screen {
