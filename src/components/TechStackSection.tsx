@@ -75,18 +75,20 @@ const TechCard: React.FC<{ item: TechItem; index: number }> = ({ item }) => {
         {item.num.replace(/\s+/g, '')}
       </span>
 
-      <div className="tech-card-left" style={{ position: 'relative', zIndex: 2 }}>
+      <div className="tech-card-left" style={{ position: 'relative', zIndex: 2, minWidth: 0, flexShrink: 1 }}>
         <span className="tech-num" style={{ color: '#94A3B8' }}>{item.num}</span>
         <h3 className="tech-name" style={{ color: '#0F172A' }}>{item.name}</h3>
       </div>
 
       <div
+        className="tech-card-right"
         style={{
           display: 'flex',
           alignItems: 'center',
-          gap: '14px',
+          gap: '10px',
           position: 'relative',
           zIndex: 2,
+          flexShrink: 0,
         }}
       >
         <span className="tech-category-light">{item.category}</span>
@@ -97,9 +99,10 @@ const TechCard: React.FC<{ item: TechItem; index: number }> = ({ item }) => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
+            flexShrink: 0,
           }}
         >
-          <TechIcon name={item.name} size={30} />
+          <TechIcon name={item.name} size={28} />
         </div>
       </div>
     </div>
@@ -174,10 +177,11 @@ export const TechStackSection: React.FC = () => {
           background: #FFFFFF;
           border: 1px solid #E2E8F0;
           border-radius: 12px;
-          padding: 24px 28px;
+          padding: 20px 22px;
           display: flex;
           align-items: center;
           justify-content: space-between;
+          gap: 12px;
           overflow: hidden;
           box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
         }
@@ -185,14 +189,42 @@ export const TechStackSection: React.FC = () => {
           border-color: #CBD5E1;
           box-shadow: 0 12px 30px rgba(0, 0, 0, 0.08);
         }
+        .tech-card-light .tech-card-left {
+          display: flex;
+          align-items: baseline;
+          gap: 12px;
+          min-width: 0;
+          flex-shrink: 1;
+        }
+        .tech-card-light .tech-num {
+          font-family: var(--font-mono);
+          font-size: 0.78rem;
+          letter-spacing: 0.12em;
+          color: #94A3B8;
+          white-space: nowrap !important;
+          flex-shrink: 0 !important;
+          line-height: 1 !important;
+        }
+        .tech-card-light .tech-name {
+          font-family: var(--font-display);
+          font-size: clamp(1.2rem, 1.4vw, 1.55rem);
+          letter-spacing: 0.02em;
+          color: #0F172A;
+          white-space: nowrap !important;
+          line-height: 1.1;
+          margin: 0;
+        }
         .tech-category-light {
           font-family: var(--font-mono);
-          font-size: 0.75rem;
-          letter-spacing: 0.08em;
+          font-size: 0.7rem;
+          letter-spacing: 0.04em;
           color: #64748B;
           background: #F1F5F9;
-          padding: 4px 10px;
+          padding: 4px 9px;
           border-radius: 6px;
+          white-space: nowrap !important;
+          flex-shrink: 0 !important;
+          line-height: 1.2 !important;
         }
       `}</style>
     </section>

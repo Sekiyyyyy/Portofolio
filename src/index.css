@@ -793,25 +793,30 @@ body {
 .tech-num {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  letter-spacing: 0.15em;
+  letter-spacing: 0.12em;
   color: #71717A;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .tech-name {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: clamp(1.2rem, 1.4vw, 1.55rem);
   letter-spacing: 0.04em;
   color: #FFFFFF;
+  white-space: nowrap;
 }
 
 .tech-category {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
   color: #A1A1AA;
   background: rgba(255, 255, 255, 0.05);
   padding: 4px 10px;
   border-radius: 6px;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 /* ==========================================================================

@@ -57,18 +57,18 @@ export const portfolioData = {
     }
   ],
   techStack: [
-    { num: "0 1", name: "Laravel", category: "Framework" },
-    { num: "0 2", name: "Next.js", category: "Framework" },
-    { num: "0 3", name: "React", category: "Library" },
-    { num: "0 4", name: "TypeScript", category: "Language" },
-    { num: "0 5", name: "Flutter", category: "Mobile Framework" },
-    { num: "0 6", name: "Dart", category: "Language" },
-    { num: "0 7", name: "Go", category: "Language" },
-    { num: "0 8", name: "PostgreSQL", category: "Database" },
-    { num: "0 9", name: "MySQL", category: "Database" },
-    { num: "1 0", name: "Tailwind", category: "Styling" },
-    { num: "1 1", name: "PHP", category: "Language" },
-    { num: "1 2", name: "Git", category: "Version Control" }
+    { num: "01", name: "Laravel", category: "Framework" },
+    { num: "02", name: "Next.js", category: "Framework" },
+    { num: "03", name: "React", category: "Library" },
+    { num: "04", name: "TypeScript", category: "Language" },
+    { num: "05", name: "Flutter", category: "Mobile Framework" },
+    { num: "06", name: "Dart", category: "Language" },
+    { num: "07", name: "Go", category: "Language" },
+    { num: "08", name: "PostgreSQL", category: "Database" },
+    { num: "09", name: "MySQL", category: "Database" },
+    { num: "10", name: "Tailwind", category: "Styling" },
+    { num: "11", name: "PHP", category: "Language" },
+    { num: "12", name: "Git", category: "Version Control" }
   ],
   journeyMoments: [
     "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&q=80",
