@@ -183,10 +183,10 @@ export const AboutSection: React.FC = () => {
           width: 100%;
           text-align: center;
           font-family: var(--font-display, 'Syne', sans-serif);
-          font-size: clamp(3.2rem, 10vw, 8.2rem);
+          font-size: clamp(2.8rem, 7.5vw, 6.5rem);
           font-weight: 800;
           color: rgba(0, 0, 0, 0.035);
-          letter-spacing: 0.06em;
+          letter-spacing: 0.08em;
           text-transform: uppercase;
           pointer-events: none;
           white-space: nowrap;

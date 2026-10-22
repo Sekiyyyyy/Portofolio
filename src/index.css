@@ -358,17 +358,20 @@ body {
 
 .about-watermark {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  top: 75px;
+  left: 0;
+  right: 0;
+  width: 100%;
+  text-align: center;
   font-family: var(--font-display);
-  font-size: clamp(6rem, 24vw, 22rem);
-  color: var(--about-watermark);
+  font-size: clamp(2.8rem, 7.5vw, 6.5rem);
+  color: rgba(0, 0, 0, 0.035);
   white-space: nowrap;
   pointer-events: none;
   user-select: none;
   z-index: 1;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 .about-content-inner {
