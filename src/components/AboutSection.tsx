@@ -177,16 +177,13 @@ export const AboutSection: React.FC = () => {
         }
         .about-watermark {
           position: absolute;
-          top: 75px;
-          left: 0;
-          right: 0;
-          width: 100%;
-          text-align: center;
+          top: clamp(45px, 6vw, 75px);
+          left: clamp(16px, 3.5vw, 48px);
           font-family: var(--font-display, 'Syne', sans-serif);
-          font-size: clamp(2.8rem, 7.5vw, 6.5rem);
+          font-size: clamp(3.2rem, 9.2vw, 7.8rem);
           font-weight: 800;
           color: rgba(0, 0, 0, 0.035);
-          letter-spacing: 0.08em;
+          letter-spacing: 0.06em;
           text-transform: uppercase;
           pointer-events: none;
           white-space: nowrap;
