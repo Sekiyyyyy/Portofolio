@@ -109,7 +109,7 @@ export const portfolioData = {
     privateRepos: 2,
     followers: "8 FOLLOWERS",
     following: "9 FOLLOWING",
-    contributions: "209 contributions in the last year",
+    contributions: "321 contributions in the last year",
     url: "https://github.com/Sekiyyyyy"
   },
   songs: [
