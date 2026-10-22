@@ -12,9 +12,10 @@ export const AboutSection: React.FC = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Watermark subtle parallax drift
+      // Watermark subtle vertical parallax drift (Centered via CSS text-align: center)
       gsap.to(watermarkRef.current, {
-        y: -60,
+        y: -36,
+        ease: 'none',
         scrollTrigger: {
           trigger: sectionRef.current,
           start: 'top bottom',
@@ -176,18 +177,20 @@ export const AboutSection: React.FC = () => {
         }
         .about-watermark {
           position: absolute;
-          top: 6%;
-          left: 50%;
-          transform: translateX(-50%);
-          font-family: var(--font-display);
-          font-size: clamp(2.4rem, 7.2vw, 5.8rem);
+          top: 35px;
+          left: 0;
+          right: 0;
+          width: 100%;
+          text-align: center;
+          font-family: var(--font-display, 'Syne', sans-serif);
+          font-size: clamp(1.8rem, 5vw, 3.8rem);
           font-weight: 800;
           color: rgba(0, 0, 0, 0.035);
-          letter-spacing: 0.08em;
+          letter-spacing: 0.16em;
+          text-transform: uppercase;
           pointer-events: none;
           white-space: nowrap;
-          max-width: 92vw;
-          text-align: center;
+          user-select: none;
           z-index: 1;
         }
         .about-heading {
