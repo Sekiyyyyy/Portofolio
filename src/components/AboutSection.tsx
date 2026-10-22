@@ -204,10 +204,10 @@ export const AboutSection: React.FC = () => {
         }
         .about-heading {
           font-family: var(--font-display);
-          font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+          font-size: clamp(1.85rem, 3.4vw, 2.65rem);
           font-weight: 800;
-          letter-spacing: -0.03em;
-          line-height: 1.05;
+          letter-spacing: -0.025em;
+          line-height: 1.1;
           color: #0F172A;
           margin: 0;
         }

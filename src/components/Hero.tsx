@@ -1,10 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import { portfolioData } from '../data/portfolioData';
 import OrbitingCirclesGlobe from '@/components/ui/orbiting-circles-02';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 export const Hero: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const marqueeInnerRef = useRef<HTMLDivElement>(null);
+
+  // Parallax Wave Divider Refs
+  const waveWrapperRef = useRef<HTMLDivElement>(null);
+  const waveBackRef = useRef<SVGGElement>(null);
+  const waveMidRef = useRef<SVGGElement>(null);
+  const waveFrontRef = useRef<SVGGElement>(null);
 
   // Parallax Layer Refs (Pure 2.5D Layer Engine)
   const layerDeepRef = useRef<HTMLDivElement>(null);    // Layer 1: Stars, Aurora & Blueprint Grid
@@ -86,32 +95,57 @@ export const Hero: React.FC = () => {
     };
   }, []);
 
-  // Marquee Continuous Loop
+  // ScrollTrigger Parallax for Wave Transition
   useEffect(() => {
-    let xPos = 0;
-    let animationId: number;
-    const speed = 1.0;
+    const ctx = gsap.context(() => {
+      if (!waveBackRef.current || !waveMidRef.current || !waveFrontRef.current) return;
 
-    const marqueeLoop = () => {
-      xPos -= speed;
-      if (marqueeInnerRef.current) {
-        const halfWidth = marqueeInnerRef.current.scrollWidth / 2;
-        if (Math.abs(xPos) >= halfWidth) {
-          xPos = 0;
-        }
-        marqueeInnerRef.current.style.transform = `translateX(${xPos}px)`;
-      }
-      animationId = requestAnimationFrame(marqueeLoop);
-    };
+      // Deep back wave shifts left & rises
+      gsap.to(waveBackRef.current, {
+        x: -70,
+        y: -18,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.2,
+        },
+      });
 
-    animationId = requestAnimationFrame(marqueeLoop);
-    return () => cancelAnimationFrame(animationId);
+      // Mid wave counter-shifts right & rises
+      gsap.to(waveMidRef.current, {
+        x: 65,
+        y: -24,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1.5,
+        },
+      });
+
+      // Front wave raises gently to meet About section
+      gsap.to(waveFrontRef.current, {
+        y: -10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top top',
+          end: 'bottom top',
+          scrub: 1,
+        },
+      });
+    }, containerRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
     <section
       ref={containerRef}
-      className="hero-viewport relative w-full h-screen overflow-hidden bg-[#07090E] select-none flex flex-col justify-between"
+      className="hero-viewport relative w-full min-h-screen overflow-hidden bg-[#07090E] select-none flex flex-col justify-between"
       id="home"
     >
       {/* 2.5D Full-Width Parallax Depth Stage */}
@@ -249,26 +283,50 @@ export const Hero: React.FC = () => {
       </div>
 
       {/* ============================================================== */}
-      {/* BASE MARQUEE TICKER (Single Source for Tech Keywords with Logos) */}
+      {/* FLUID MULTI-LAYER PARALLAX WAVE DIVIDER (Hero -> About Seam)  */}
       {/* ============================================================== */}
-      <div className="relative z-40 w-full">
-        <div className="marquee-strip">
-          <div ref={marqueeInnerRef} className="marquee-content">
-            {[...portfolioData.hero.marquee, ...portfolioData.hero.marquee].map((item, i) => (
-              <div key={`${item}-${i}`} className="marquee-token">
-                <span className="token-dot" />
-                <span className="token-text">{item}</span>
-                <span className="token-sep">✦</span>
-              </div>
-            ))}
-          </div>
-        </div>
+      <div ref={waveWrapperRef} className="hero-wave-divider">
+        <svg
+          className="hero-wave-svg"
+          viewBox="0 0 1800 160"
+          preserveAspectRatio="none"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          {/* Wave Layer 1: Back Deep Translucent Wave */}
+          <g ref={waveBackRef}>
+            <path
+              className="wave-path-back"
+              d="M-100,55 C200,125 500,10 880,60 C1240,110 1540,20 1900,50 L1900,165 L-100,165 Z"
+              fill="rgba(255, 255, 255, 0.18)"
+            />
+          </g>
+
+          {/* Wave Layer 2: Mid Translucent Wave */}
+          <g ref={waveMidRef}>
+            <path
+              className="wave-path-mid"
+              d="M-100,80 C240,25 620,115 1020,40 C1380,-10 1620,75 1900,65 L1900,165 L-100,165 Z"
+              fill="rgba(255, 255, 255, 0.45)"
+            />
+          </g>
+
+          {/* Wave Layer 3: Solid Foreground Wave connecting flush to #FFFFFF About Section */}
+          <g ref={waveFrontRef}>
+            <path
+              className="wave-path-front"
+              d="M-100,105 C320,55 760,135 1160,75 C1460,35 1680,85 1900,80 L1900,165 L-100,165 Z"
+              fill="#FFFFFF"
+            />
+          </g>
+        </svg>
       </div>
 
       {/* Component Styles */}
       <style>{`
         .hero-viewport {
           background-color: #07090E;
+          min-height: 100vh;
         }
 
         .hero-stage {
@@ -329,12 +387,12 @@ export const Hero: React.FC = () => {
 
         .hero-name-heading {
           font-family: var(--font-display, 'Syne', sans-serif);
-          font-size: clamp(2.6rem, 5.8vw, 4.4rem);
+          font-size: clamp(1.85rem, 3.8vw, 3.1rem);
           font-weight: 800;
-          line-height: 0.98;
-          letter-spacing: -0.035em;
-          margin: 0 0 16px 0;
-          text-shadow: 0 12px 40px rgba(0, 0, 0, 0.95);
+          line-height: 1.05;
+          letter-spacing: -0.025em;
+          margin: 0 0 14px 0;
+          text-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
         }
 
         .name-silver {
@@ -351,21 +409,21 @@ export const Hero: React.FC = () => {
           display: flex;
           align-items: center;
           gap: 10px;
-          margin-bottom: 18px;
+          margin-bottom: 16px;
         }
 
         .role-prefix {
           font-family: var(--font-mono, monospace);
-          font-size: 0.95rem;
+          font-size: 0.9rem;
           font-weight: 700;
           color: #D96B27;
         }
 
         .role-text {
           font-family: var(--font-display, 'Syne', sans-serif);
-          font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+          font-size: clamp(0.95rem, 1.4vw, 1.15rem);
           font-weight: 700;
-          letter-spacing: 0.18em;
+          letter-spacing: 0.16em;
           text-transform: uppercase;
           color: #D96B27;
           text-shadow: 0 2px 20px rgba(217, 107, 39, 0.35);
@@ -452,59 +510,43 @@ export const Hero: React.FC = () => {
         .mote-b { width: 4.5px; height: 4.5px; top: 62%; right: 18%; background-color: #FFA873; }
         .mote-c { width: 3px; height: 3px; top: 74%; left: 42%; }
 
-        /* Marquee Ticker */
-        .marquee-strip {
+        /* Wave Transition Divider (Parallax + Ambient Float) */
+        .hero-wave-divider {
           position: relative;
-          background: rgba(7, 9, 14, 0.92);
-          border-top: 1px solid rgba(255, 255, 255, 0.06);
-          padding: 12px 0;
+          width: 100%;
+          height: clamp(80px, 12vw, 150px);
           overflow: hidden;
-          backdrop-filter: blur(12px);
-          -webkit-backdrop-filter: blur(12px);
+          line-height: 0;
+          z-index: 30;
+          pointer-events: none;
+          margin-top: auto;
         }
 
-        .marquee-content {
-          display: flex;
-          align-items: center;
-          white-space: nowrap;
-          will-change: transform;
+        .hero-wave-svg {
+          position: absolute;
+          bottom: -1px;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: block;
         }
 
-        .marquee-token {
-          display: inline-flex;
-          align-items: center;
-          gap: 10px;
-          padding: 0 20px;
-          font-family: var(--font-display, sans-serif);
-          font-size: 0.82rem;
-          font-weight: 700;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
-          color: rgba(255, 255, 255, 0.7);
+        @keyframes waveFloatA {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-4px); }
         }
 
-        .token-dot {
-          width: 6px;
-          height: 6px;
-          border-radius: 50%;
-          background: #D96B27;
-          box-shadow: 0 0 8px rgba(217, 107, 39, 0.9);
-          display: inline-block;
-          flex-shrink: 0;
+        @keyframes waveFloatB {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(5px); }
         }
 
-        .token-text {
-          transition: color 0.2s ease;
-        }
-        .marquee-token:hover .token-text {
-          color: #FFFFFF;
+        .wave-path-back {
+          animation: waveFloatA 8s ease-in-out infinite;
         }
 
-        .token-sep {
-          font-size: 0.55rem;
-          color: #D96B27;
-          opacity: 0.6;
-          margin-left: 10px;
+        .wave-path-mid {
+          animation: waveFloatB 10s ease-in-out infinite;
         }
       `}</style>
     </section>
