@@ -176,16 +176,18 @@ export const AboutSection: React.FC = () => {
         }
         .about-watermark {
           position: absolute;
-          top: 8%;
+          top: 6%;
           left: 50%;
           transform: translateX(-50%);
           font-family: var(--font-display);
-          font-size: clamp(6rem, 18vw, 16rem);
+          font-size: clamp(2.4rem, 7.2vw, 5.8rem);
           font-weight: 800;
-          color: rgba(0, 0, 0, 0.03);
-          letter-spacing: 0.05em;
+          color: rgba(0, 0, 0, 0.035);
+          letter-spacing: 0.08em;
           pointer-events: none;
           white-space: nowrap;
+          max-width: 92vw;
+          text-align: center;
           z-index: 1;
         }
         .about-heading {

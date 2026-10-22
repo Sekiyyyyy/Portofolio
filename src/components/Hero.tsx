@@ -100,10 +100,10 @@ export const Hero: React.FC = () => {
     const ctx = gsap.context(() => {
       if (!waveBackRef.current || !waveMidRef.current) return;
 
-      // Deep back wave shifts left & subtly rises
+      // Deep back wave shifts left & rises
       gsap.to(waveBackRef.current, {
-        x: -55,
-        y: -8,
+        x: -60,
+        y: -12,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -115,8 +115,8 @@ export const Hero: React.FC = () => {
 
       // Mid wave counter-shifts right & rises
       gsap.to(waveMidRef.current, {
-        x: 50,
-        y: -10,
+        x: 60,
+        y: -16,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -129,7 +129,7 @@ export const Hero: React.FC = () => {
       // Front wave drifts horizontally only — zero vertical lift to keep the white foundation 100% solid and flush
       if (waveFrontRef.current) {
         gsap.to(waveFrontRef.current, {
-          x: -20,
+          x: -25,
           ease: 'none',
           scrollTrigger: {
             trigger: containerRef.current,
@@ -147,11 +147,11 @@ export const Hero: React.FC = () => {
   return (
     <section
       ref={containerRef}
-      className="hero-viewport relative w-full min-h-screen overflow-hidden bg-[#07090E] select-none flex flex-col justify-between"
+      className="hero-viewport relative w-full select-none flex flex-col justify-between"
       id="home"
     >
-      {/* 2.5D Full-Width Parallax Depth Stage */}
-      <div className="hero-stage relative w-full flex-1 flex items-center overflow-hidden">
+      {/* 2.5D Full-Width Parallax Depth Stage (True 100vh Full Screen Experience) */}
+      <div className="hero-stage relative w-full flex items-center overflow-hidden">
         
         {/* ============================================================ */}
         {/* LAYER 1: Deep Cosmos, Blueprint Grid & Aurora Glow (zIndex 1) */}
@@ -290,7 +290,7 @@ export const Hero: React.FC = () => {
       <div ref={waveWrapperRef} className="hero-wave-divider">
         <svg
           className="hero-wave-svg"
-          viewBox="0 0 1800 120"
+          viewBox="0 0 1440 140"
           preserveAspectRatio="none"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -299,8 +299,8 @@ export const Hero: React.FC = () => {
           <g ref={waveBackRef}>
             <path
               className="wave-path-back"
-              d="M-100,52 C260,82 580,32 940,62 C1300,92 1600,38 1900,54 L1900,160 L-100,160 Z"
-              fill="rgba(255, 255, 255, 0.16)"
+              d="M-80,48 C140,98 320,15 540,55 C760,95 940,20 1160,65 C1360,105 1460,35 1560,50 L1560,180 L-80,180 Z"
+              fill="rgba(255, 255, 255, 0.18)"
             />
           </g>
 
@@ -308,8 +308,8 @@ export const Hero: React.FC = () => {
           <g ref={waveMidRef}>
             <path
               className="wave-path-mid"
-              d="M-100,68 C320,38 680,88 1080,48 C1420,24 1680,72 1900,62 L1900,160 L-100,160 Z"
-              fill="rgba(255, 255, 255, 0.40)"
+              d="M-80,75 C120,25 340,90 560,40 C780,-10 980,85 1200,35 C1380,-5 1480,65 1560,60 L1560,180 L-80,180 Z"
+              fill="rgba(255, 255, 255, 0.42)"
             />
           </g>
 
@@ -317,7 +317,7 @@ export const Hero: React.FC = () => {
           <g ref={waveFrontRef}>
             <path
               className="wave-path-front"
-              d="M-100,78 C360,54 780,94 1180,66 C1480,46 1720,76 1900,72 L1900,260 L-100,260 Z"
+              d="M-80,65 C160,105 380,45 600,85 C820,125 1020,45 1240,75 C1420,100 1500,60 1560,65 L1560,260 L-80,260 Z"
               fill="#FFFFFF"
             />
           </g>
@@ -329,12 +329,17 @@ export const Hero: React.FC = () => {
         .hero-viewport {
           background-color: #07090E;
           min-height: 100vh;
+          min-height: 100dvh;
+          position: relative;
         }
 
         .hero-stage {
           position: relative;
           width: 100%;
-          height: 100%;
+          min-height: 100vh;
+          min-height: 100dvh;
+          display: flex;
+          align-items: center;
         }
 
         .parallax-layer {
@@ -516,12 +521,12 @@ export const Hero: React.FC = () => {
         .hero-wave-divider {
           position: relative;
           width: 100%;
-          height: clamp(38px, 5.2vw, 64px);
+          height: clamp(65px, 8.5vw, 110px);
           overflow: hidden;
           line-height: 0;
           z-index: 30;
           pointer-events: none;
-          margin-top: auto;
+          margin-top: -30px;
           margin-bottom: -2px;
           transform: translateZ(0);
         }
@@ -537,12 +542,12 @@ export const Hero: React.FC = () => {
 
         @keyframes waveFloatA {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-3px); }
+          50% { transform: translateY(-4px); }
         }
 
         @keyframes waveFloatB {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(3px); }
+          50% { transform: translateY(4px); }
         }
 
         .wave-path-back {
