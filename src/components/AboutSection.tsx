@@ -58,21 +58,20 @@ export const AboutSection: React.FC = () => {
         }
       );
 
-      // Progressive Scroll-Scrub Word Reveal (Apple / Awwwards Editorial Effect)
+      // Editorial Story Entrance Animation (Clean, crisp, immediate 100% readability)
       gsap.fromTo(
-        '.about-scrub-word',
+        '.about-story-para',
+        { opacity: 0, y: 24 },
         {
-          color: 'rgba(15, 23, 42, 0.18)',
-        },
-        {
-          color: '#0F172A',
-          stagger: 0.04,
-          ease: 'none',
+          opacity: 1,
+          y: 0,
+          duration: 0.85,
+          stagger: 0.18,
+          ease: 'power2.out',
           scrollTrigger: {
-            trigger: '.about-body-text-block',
-            start: 'top 75%',
-            end: 'bottom 50%',
-            scrub: 0.8,
+            trigger: contentRef.current,
+            start: 'top 78%',
+            toggleActions: 'play none none reverse',
           },
         }
       );
@@ -80,7 +79,7 @@ export const AboutSection: React.FC = () => {
       // Highlighter pen sweep on scroll
       ScrollTrigger.create({
         trigger: '.highlighter-pen',
-        start: 'top 68%',
+        start: 'top 75%',
         onEnter: () => {
           document.querySelector('.highlighter-pen')?.classList.add('active');
         },
@@ -130,30 +129,16 @@ export const AboutSection: React.FC = () => {
             </h2>
           </div>
 
-          {/* Clean Editorial Story Layout with Word-by-Word Scroll Reveal */}
+          {/* Clean Editorial Story Layout with Smooth Entrance Animation */}
           <div className="about-text-column about-body-text-block max-w-[840px]">
-            <p className="about-body-text text-[clamp(1.18rem,1.85vw,1.48rem)] font-medium leading-[1.7] text-[#0F172A]">
-              <span className="about-scrub-word">Hello, </span>
-              <span className="about-scrub-word">I </span>
-              <span className="about-scrub-word">am </span>
-              <span className="about-scrub-word">
-                <span className="highlighter-pen">{portfolioData.about.nameHighlight}</span>{' '}
-              </span>
-              <span className="about-scrub-word">(a.k.a </span>
-              <span className="about-scrub-word">{portfolioData.about.aliasHighlight}). </span>
-              {portfolioData.about.bioPart1.split(' ').map((word, i) => (
-                <span key={i} className="about-scrub-word">
-                  {word}{' '}
-                </span>
-              ))}
+            <p className="about-story-para text-[clamp(1.15rem,1.75vw,1.42rem)] font-medium leading-[1.7] text-[#0F172A]">
+              Hello, I am{' '}
+              <span className="highlighter-pen font-bold text-[#0F172A]">{portfolioData.about.nameHighlight}</span>{' '}
+              <span className="text-[#64748B] font-normal">(a.k.a {portfolioData.about.aliasHighlight})</span>. {portfolioData.about.bioPart1}
             </p>
 
-            <p className="about-body-text text-[clamp(1rem,1.4vw,1.18rem)] leading-[1.75] mt-6">
-              {portfolioData.about.bioPart2.split(' ').map((word, i) => (
-                <span key={i} className="about-scrub-word">
-                  {word}{' '}
-                </span>
-              ))}
+            <p className="about-story-para text-[clamp(0.98rem,1.35vw,1.16rem)] leading-[1.8] mt-6 text-[#334155]">
+              {portfolioData.about.bioPart2}
             </p>
 
             {/* Core Philosophy Tag */}
@@ -185,8 +170,9 @@ export const AboutSection: React.FC = () => {
           position: relative;
           background-color: #FFFFFF;
           color: #0A0A0A;
-          padding: 130px 0;
+          padding: 120px 0 130px 0;
           overflow: hidden;
+          margin-top: -2px;
         }
         .about-watermark {
           position: absolute;
@@ -211,12 +197,8 @@ export const AboutSection: React.FC = () => {
           color: #0F172A;
           margin: 0;
         }
-        .about-body-text {
+        .about-story-para {
           font-family: var(--font-body);
-        }
-        .about-scrub-word {
-          display: inline;
-          transition: color 0.15s ease;
         }
         .highlighter-pen {
           position: relative;

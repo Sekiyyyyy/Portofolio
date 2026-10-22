@@ -98,12 +98,12 @@ export const Hero: React.FC = () => {
   // ScrollTrigger Parallax for Wave Transition
   useEffect(() => {
     const ctx = gsap.context(() => {
-      if (!waveBackRef.current || !waveMidRef.current || !waveFrontRef.current) return;
+      if (!waveBackRef.current || !waveMidRef.current) return;
 
-      // Deep back wave shifts left & rises
+      // Deep back wave shifts left & subtly rises
       gsap.to(waveBackRef.current, {
-        x: -70,
-        y: -18,
+        x: -55,
+        y: -8,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -115,8 +115,8 @@ export const Hero: React.FC = () => {
 
       // Mid wave counter-shifts right & rises
       gsap.to(waveMidRef.current, {
-        x: 65,
-        y: -24,
+        x: 50,
+        y: -10,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -126,17 +126,19 @@ export const Hero: React.FC = () => {
         },
       });
 
-      // Front wave raises gently to meet About section
-      gsap.to(waveFrontRef.current, {
-        y: -10,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top top',
-          end: 'bottom top',
-          scrub: 1,
-        },
-      });
+      // Front wave drifts horizontally only — zero vertical lift to keep the white foundation 100% solid and flush
+      if (waveFrontRef.current) {
+        gsap.to(waveFrontRef.current, {
+          x: -20,
+          ease: 'none',
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: 'top top',
+            end: 'bottom top',
+            scrub: 1,
+          },
+        });
+      }
     }, containerRef);
 
     return () => ctx.revert();
@@ -232,8 +234,8 @@ export const Hero: React.FC = () => {
               </div>
 
               {/* Right Column: Orbiting Circles 3D Particle Globe Centerpiece */}
-              <div className="lg:col-span-5 relative w-full flex items-center justify-center lg:justify-end z-10 pointer-events-auto">
-                <div className="w-full max-w-[420px] sm:max-w-[440px] relative flex items-center justify-center">
+              <div className="lg:col-span-5 relative w-full flex items-center justify-center lg:justify-end z-10 pointer-events-auto -translate-y-2 lg:-translate-y-6">
+                <div className="w-full max-w-[400px] sm:max-w-[420px] relative flex items-center justify-center">
                   <OrbitingCirclesGlobe centered={true} className="w-full" />
                 </div>
               </div>
@@ -288,7 +290,7 @@ export const Hero: React.FC = () => {
       <div ref={waveWrapperRef} className="hero-wave-divider">
         <svg
           className="hero-wave-svg"
-          viewBox="0 0 1800 160"
+          viewBox="0 0 1800 120"
           preserveAspectRatio="none"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -297,8 +299,8 @@ export const Hero: React.FC = () => {
           <g ref={waveBackRef}>
             <path
               className="wave-path-back"
-              d="M-100,55 C200,125 500,10 880,60 C1240,110 1540,20 1900,50 L1900,165 L-100,165 Z"
-              fill="rgba(255, 255, 255, 0.18)"
+              d="M-100,52 C260,82 580,32 940,62 C1300,92 1600,38 1900,54 L1900,160 L-100,160 Z"
+              fill="rgba(255, 255, 255, 0.16)"
             />
           </g>
 
@@ -306,8 +308,8 @@ export const Hero: React.FC = () => {
           <g ref={waveMidRef}>
             <path
               className="wave-path-mid"
-              d="M-100,80 C240,25 620,115 1020,40 C1380,-10 1620,75 1900,65 L1900,165 L-100,165 Z"
-              fill="rgba(255, 255, 255, 0.45)"
+              d="M-100,68 C320,38 680,88 1080,48 C1420,24 1680,72 1900,62 L1900,160 L-100,160 Z"
+              fill="rgba(255, 255, 255, 0.40)"
             />
           </g>
 
@@ -315,7 +317,7 @@ export const Hero: React.FC = () => {
           <g ref={waveFrontRef}>
             <path
               className="wave-path-front"
-              d="M-100,105 C320,55 760,135 1160,75 C1460,35 1680,85 1900,80 L1900,165 L-100,165 Z"
+              d="M-100,78 C360,54 780,94 1180,66 C1480,46 1720,76 1900,72 L1900,260 L-100,260 Z"
               fill="#FFFFFF"
             />
           </g>
@@ -514,31 +516,33 @@ export const Hero: React.FC = () => {
         .hero-wave-divider {
           position: relative;
           width: 100%;
-          height: clamp(80px, 12vw, 150px);
+          height: clamp(38px, 5.2vw, 64px);
           overflow: hidden;
           line-height: 0;
           z-index: 30;
           pointer-events: none;
           margin-top: auto;
+          margin-bottom: -2px;
+          transform: translateZ(0);
         }
 
         .hero-wave-svg {
           position: absolute;
-          bottom: -1px;
+          bottom: -2px;
           left: 0;
           width: 100%;
-          height: 100%;
+          height: calc(100% + 2px);
           display: block;
         }
 
         @keyframes waveFloatA {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-4px); }
+          50% { transform: translateY(-3px); }
         }
 
         @keyframes waveFloatB {
           0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(5px); }
+          50% { transform: translateY(3px); }
         }
 
         .wave-path-back {

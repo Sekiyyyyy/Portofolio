@@ -77,8 +77,10 @@ export function App() {
     const timer = setTimeout(() => {
       const ctx = gsap.context(() => {
         // ── Generic Section Reveal: Every section fades in & slides up ──
+        // (Note: #about is handled natively inside AboutSection.tsx without root vertical translation
+        // to preserve the zero-gap seamless transition with the Hero wave divider)
         const sections = gsap.utils.toArray<HTMLElement>(
-          '#about, #projects, #tech, #moments, #journey, #github, #music, #contact'
+          '#projects, #tech, #moments, #journey, #github, #music, #contact'
         );
 
         sections.forEach((section) => {

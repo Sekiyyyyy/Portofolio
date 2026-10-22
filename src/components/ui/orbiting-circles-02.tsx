@@ -20,7 +20,7 @@ export interface OrbitRing {
 const defaultPortfolioOrbits: OrbitRing[] = [
   {
     // Orbit 1 (Inner): Frontend Core (React, TypeScript, Next.js, Tailwind CSS)
-    size: "w-[210px] h-[210px] sm:w-[225px] sm:h-[225px] lg:w-[235px] lg:h-[235px]",
+    size: "w-[170px] h-[170px] sm:w-[185px] sm:h-[185px] lg:w-[195px] lg:h-[195px]",
     duration: 30,
     borderStyle: "border border-white/20 shadow-[0_0_12px_rgba(255,255,255,0.04)]",
     icons: [
@@ -32,7 +32,7 @@ const defaultPortfolioOrbits: OrbitRing[] = [
   },
   {
     // Orbit 2 (Middle): Backend & Systems (Laravel, PHP, Go, PostgreSQL) - Offset by 30°
-    size: "w-[290px] h-[290px] sm:w-[310px] sm:h-[310px] lg:w-[325px] lg:h-[325px]",
+    size: "w-[240px] h-[240px] sm:w-[260px] sm:h-[260px] lg:w-[275px] lg:h-[275px]",
     duration: 42,
     borderStyle: "border border-[#D96B27]/45 border-dashed shadow-[0_0_18px_rgba(217,107,39,0.08)]",
     icons: [
@@ -44,7 +44,7 @@ const defaultPortfolioOrbits: OrbitRing[] = [
   },
   {
     // Orbit 3 (Outer): Mobile, Database & Tooling (Flutter, Dart, MySQL, Git) - Offset by 60°
-    size: "w-[370px] h-[370px] sm:w-[395px] sm:h-[395px] lg:w-[415px] lg:h-[415px]",
+    size: "w-[310px] h-[310px] sm:w-[335px] sm:h-[335px] lg:w-[355px] lg:h-[355px]",
     duration: 55,
     borderStyle: "border border-cyan-400/25 shadow-[0_0_18px_rgba(56,189,248,0.06)]",
     icons: [
@@ -66,7 +66,7 @@ interface OrbitingCirclesGlobeProps {
 export default function OrbitingCirclesGlobe({
   className = "",
   orbits = defaultPortfolioOrbits,
-  centerGlobeSize = "w-[120px] h-[120px] sm:w-[130px] sm:h-[130px] lg:w-[140px] lg:h-[140px]",
+  centerGlobeSize = "w-[95px] h-[95px] sm:w-[105px] sm:h-[105px] lg:w-[115px] lg:h-[115px]",
   centered = true,
 }: OrbitingCirclesGlobeProps) {
   const centerPosClass = centered
@@ -76,7 +76,7 @@ export default function OrbitingCirclesGlobe({
   return (
     <div
       className={`relative w-full ${
-        centered ? "h-[440px] sm:h-[470px] lg:h-[490px]" : "h-110 md:h-160"
+        centered ? "h-[360px] sm:h-[390px] lg:h-[410px]" : "h-110 md:h-160"
       } flex justify-center items-center select-none ${className}`}
     >
       <style>{`
@@ -141,7 +141,7 @@ export default function OrbitingCirclesGlobe({
                 }
               >
                 <div
-                  className="absolute -top-[19px] -left-[19px] w-[38px] h-[38px] rounded-full border border-white/20 bg-[#090D16]/95 shadow-[0_4px_16px_rgba(0,0,0,0.7)] backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:scale-125 hover:border-[#D96B27] hover:shadow-[0_0_15px_rgba(217,107,39,0.6)] cursor-pointer group pointer-events-auto"
+                  className="absolute -top-[18px] -left-[18px] w-[36px] h-[36px] rounded-full border border-white/20 bg-[#090D16]/95 shadow-[0_4px_16px_rgba(0,0,0,0.7)] backdrop-blur-md flex items-center justify-center transition-all duration-300 hover:scale-125 hover:border-[#D96B27] hover:shadow-[0_0_15px_rgba(217,107,39,0.6)] cursor-pointer group pointer-events-auto"
                   style={
                     {
                       transformOrigin: "center center",
@@ -154,9 +154,9 @@ export default function OrbitingCirclesGlobe({
                   <img
                     src={iconData.src}
                     alt={iconData.alt}
-                    width={20}
-                    height={20}
-                    className="w-[20px] h-[20px] object-contain transition-transform duration-200 group-hover:scale-110"
+                    width={18}
+                    height={18}
+                    className="w-[18px] h-[18px] object-contain transition-transform duration-200 group-hover:scale-110"
                     loading="lazy"
                   />
                 </div>
